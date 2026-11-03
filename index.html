@@ -27,7 +27,16 @@ background:linear-gradient(160deg,#fffefa,#efe5cc);box-shadow:0 3px 6px rgba(0,0
 #home{left:8px}#fs{right:8px}
 #bar{position:fixed;left:0;right:0;top:0;height:var(--bh);z-index:25;background:linear-gradient(#5a3820,#3a2312);border-bottom:2px solid #b8902f}
 #home[hidden]{display:none}
+#splash{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;text-align:center;padding:4vmin;background:repeating-linear-gradient(92deg,#3b2414 0 6px,#44291a 6px 13px,#38210f 13px 20px),#3b2414}
+#splash[hidden]{display:none}
+#splash .box{width:100%;max-width:none;border-radius:2.5vmin;padding:7vmin 4vmin;background:radial-gradient(ellipse at 50% 20%,#2f8a52,#1d6a3a 60%,#0f4a28);border:2vmin solid #4a2d19;box-shadow:inset 0 0 90px rgba(0,0,0,.45),0 10px 24px rgba(0,0,0,.6)}
+#splash h2{margin:0;font-size:12vmin;letter-spacing:.5vmin;color:#f6dc8a;text-shadow:0 2px 0 #b8902f,0 5px 0 #8a6a1f,0 12px 20px rgba(0,0,0,.6)}
+#splash p{margin:2vmin 0 5vmin;font-size:4.6vmin;opacity:.92}
+#begin{font:inherit;font-weight:700;font-size:6.5vmin;padding:2.4vmin 7vmin;border-radius:3vmin;border:3px solid #b8902f;background:#e8cf8b;color:#2b1a0e;cursor:pointer;box-shadow:0 .8vmin 0 #8a6a1f,0 2vmin 3vmin rgba(0,0,0,.5)}
+#begin:active{transform:translateY(.5vmin)}
+#splash small{display:block;margin-top:3.5vmin;font-size:3.4vmin;opacity:.75}
 </style></head><body>
+<div id="splash"><div class="box"><h2>Solitaire</h2><p>Six classic card games</p><button id="begin">▶ Tap to play</button><small>Opens full screen</small></div></div>
 <div id="bar"></div>
 <main id="menu"><div class="panel"><h1>Solitaire</h1><p class="sub">Choose a game</p><div class="grid">
 <button class="tile" data-g="klondike"><i class="tag">In progress</i><span class="ic">♠︎</span><b>Klondike</b><span class="d">The classic. Turn 1 or 3.</span></button>
@@ -53,4 +62,6 @@ document.addEventListener('fullscreenchange',fsLabel);
 function closeGame(){const f=document.getElementById('game');if(f)f.remove();menu.hidden=false;home.hidden=true;marks()}
 document.querySelectorAll('.tile').forEach(t=>t.onclick=()=>openGame(t.dataset.g));
 home.onclick=closeGame;marks();
+const splash=document.getElementById('splash');try{if(document.fullscreenElement)splash.hidden=true}catch(e){}
+document.getElementById('begin').onclick=()=>{goFull();splash.hidden=true};
 </script></body></html>
